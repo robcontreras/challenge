@@ -1,6 +1,6 @@
 ## Getting Started
 
-###Using Docker:
+### Using Docker:
 If you have docker installed you can either run the project or the specs.
 
 Before running the service you'll need to provide the Google Search API and Bing Search API."
@@ -17,7 +17,7 @@ docker-compose up
 docker-compose run bundle exec rspec
 ```
 
-###Not Using Docker:
+### Not Using Docker:
 You will need to have the following software installed:
 
 1. Ruby (2.7.2)
