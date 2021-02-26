@@ -7,7 +7,8 @@ Before running the service you'll need to provide the Google Search API and Bing
 
 1. Copy the contents of `docker/.env.sample`
 2. Create an env file `docker/.env` and paste the contents of the sample
-3. Run the project/specs:
+3. Add your keys to the env file
+4. Run the project/specs:
 
 ```
 # running the server
@@ -25,5 +26,5 @@ You will need to have the following software installed:
 3. Navigate to the project dir
 4. Install gems: `bundle install`
 5. Set the env variables in `doker/.env.sample` in your system
-5. Run the tests: `bundle exec rake spec`
-6. Run the project `rails server`
+6. Run the tests: `bundle exec rake spec`
+7. Run the project `rails server`
