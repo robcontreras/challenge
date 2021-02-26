@@ -3,7 +3,7 @@
 ### Using Docker:
 If you have docker installed you can either run the project or the specs.
 
-Before running the service you'll need to provide the Google Search API and Bing Search API."
+Before running the service you'll need to provide the Google Search API and Bing Search API.
 
 1. Copy the contents of `docker/.env.sample`
 2. Create an env file `docker/.env` and paste the contents of the sample
