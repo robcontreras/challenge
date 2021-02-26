@@ -3,7 +3,15 @@
 module SearchEngines # :no-doc:
   # The BingEngine class represents an instance of SearchEngine created to connect specifically to Bing.
   class BingEngine < SearchEngine
+    include ActiveSupport::Configurable
+    config_accessor :api_key
+
     BASE_URL = "https://api.bing.microsoft.com/v7.0/search"
+
+    # Initialize instance with configuration
+    def initialize
+      self.api_key = ENV.fetch('BING_API_KEY')
+    end
 
     # Executes a search with a specific query.
     # @param query The string text to be searched.
@@ -23,7 +31,7 @@ module SearchEngines # :no-doc:
     # @param uri - The URI where the request will be made to
     def build_request(uri)
       request = Net::HTTP::Get.new(uri)
-      request['Ocp-Apim-Subscription-Key'] = ENV.fetch('BING_API_KEY')
+      request['Ocp-Apim-Subscription-Key'] = self.api_key
       request
     end
 
@@ -32,7 +40,7 @@ module SearchEngines # :no-doc:
     def format_response(response)
       body = JSON.parse(response.body)
       items = []
-      if response.code == 200
+      if response.code.to_i == 200
         body['webPages']['value'].each do |item|
           items << { title: item['name'], link: item['url'], snippet: item['snippet'] }
         end

@@ -3,12 +3,21 @@
 module SearchEngines # :no-doc:
   # The GoogleEngine class represents an instance of SearchEngine created to connect specifically to Bing.
   class GoogleEngine < SearchEngine
+    include ActiveSupport::Configurable
+    config_accessor :api_key, :search_engine_id
+
     BASE_URL = "https://customsearch.googleapis.com/customsearch/v1"
+
+    # Initialize instance with configuration
+    def initialize
+      self.api_key =  ENV.fetch('GOOGLE_API_KEY')
+      self.search_engine_id = ENV.fetch('GOOGLE_SEARCH_ENGINE_ID')
+    end
 
     # Executes a search with a specific query.
     # @param query The string text to be searched.
     def search(query)
-      params = { key: ENV.fetch('GOOGLE_API_KEY'), cx: ENV.fetch('GOOGLE_SEARCH_ENGINE_ID'), q: query }
+      params = { key: self.api_key, cx: self.search_engine_id, q: query }
       uri = URI(BASE_URL)
       uri.query = URI.encode_www_form(params)
       request = build_request(uri)
@@ -30,14 +39,13 @@ module SearchEngines # :no-doc:
     def format_response(response)
         items = []
         body = JSON.parse(response.body)
-      if response.code == 200
+      if response.code.to_i == 200
         body['items'].each do |item|
           items << { title: item['title'], link: item['link'], snippet: item['snippet'] }
         end
       else
         items << format_errors(body)
       end
-
       items
     end
 
