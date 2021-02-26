@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+# The SearchProcessor represents a class used to execute all search queries from the application.
 class SearchProcessor
-  # desc
+  # Initializes the SearchProcessor
+  # @param engine - The name of the engine to be used in the search.
+  # @param query - The text to be searched for.
   def initialize(engine, query)
     @engine = engine
     @query = query
@@ -10,8 +13,8 @@ class SearchProcessor
     check_for_errors
   end
 
+  # Executes the search with the given parameters.
   def execute
-
     return { errors: @errors.join('\n') }.to_json if @errors.length > 0
 
     case @engine
@@ -33,20 +36,20 @@ class SearchProcessor
 
   private
 
-  # desc
+  # Validates that the engine and search query are present.
   def check_for_errors
     text_validation
     engine_validation
     @errors.compact!
   end
 
-  # desc
+  # Validates that the search query is present and if not it returns an error
   def text_validation
     err = @query.present? ? nil : 'Please provide a text to search for.'
     @errors << err
   end
 
-  # desc
+  # Validates that the search engine string is present and if not it returns an error
   def engine_validation
     err = @engine.present? ? nil : 'Please provide an engine option to use. you can choose between `google`, `bing`, or `both`.'
     @errors << err
