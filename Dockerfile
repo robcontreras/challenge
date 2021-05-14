@@ -7,4 +7,4 @@ RUN mkdir /synak_challenge
 COPY . /synak_challenge
 WORKDIR synak_challenge
 RUN gem install bundler -v="2.1.4"
-RUN bundle install
+RUN gem install rails -v="6.1.3"
