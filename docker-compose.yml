@@ -8,7 +8,7 @@ services:
     stdin_open: true
     volumes:
       - 'bundle:/usr/local/bundle'
-      - '.:/synak_challenge'
+#      - '.:/synak_challenge'
     ports:
       - 3000:3000
     env_file:
