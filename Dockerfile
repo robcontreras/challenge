@@ -6,5 +6,6 @@ RUN apt-get update -qq && apt-get install -y build-essential nodejs git yarn nan
 RUN mkdir /synak_challenge
 COPY . /synak_challenge
 WORKDIR synak_challenge
+RUN chmod +x docker/entrypoint.sh
 RUN gem install bundler -v="2.1.4"
 RUN gem install rails -v="6.1.3"
