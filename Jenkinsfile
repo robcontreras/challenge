@@ -4,6 +4,7 @@ node {
   stage("Preparation") {
     checkout scm
     sh 'cp ./docker/.env.sample ./docker/.env'
+    sh 'docker-compose build --no-cache'
 //     sh 'git rev-parse --short HEAD > .git/commit-d'
 //     commit_id = readFile('.git/commit-id').trim()
   }
