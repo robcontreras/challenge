@@ -8,4 +8,4 @@ COPY . /synak_challenge
 WORKDIR synak_challenge
 RUN chmod +x docker/entrypoint.sh
 RUN gem install bundler -v="2.1.4"
-RUN gem install rails -v="6.1.3"
+RUN gem install rails -v="6.1.3.2"
